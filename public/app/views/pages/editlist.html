@@ -1,0 +1,22 @@
+<div class='side'>
+<!-- Custom Messages--> 
+<div ng-show='editsnrs.successMsg' class='msg1'>{{editsnrs.successMsg}}</div>
+<div ng-show='editsnrs.errorMsg' class='msg2'>{{editsnrs.errorMsg}}</div>
+<!-- Custom Messages-->
+<br>
+<form name='form3' class='form3' >
+	<input size='2' name='id' placeholder='ID' ng-model='editsnrs.regData.id'>
+	<input size='9' name='lat' placeholder='Latitude' pattern='^([5][0-9])|^([5][0-9])\.[0-9]{1,7}$' title='UK lat range (50 to 59), max. 7 digits after the dot, eg: 59.1234567' required ng-model='editsnrs.regData.lat'>
+	<input size='9' name='lng' placeholder='Longitude' pattern='^-[1-8]\.?\d{0,7}?$|^[0-2]\.?\d{0,7}?$' title='UK lng range (-8 to 2), max. 7 digits after the dot, eg: -8.1234567' required ng-model='editsnrs.regData.lng'>
+	<input size='15' name='simNu' placeholder='SIM number +44' pattern='^\+[4][4][7]\d{9}$' required ng-model='editsnrs.regData.simNu'>
+	<input type='text' name='loc' placeholder='Location' required ng-model='editsnrs.regData.loc'>
+<br>
+	<input class='btn' type='submit' value='Add' ng-disabled='form3.$invalid' data-value='add' ng-click='editsnrs.snrs(regData,$event)'/>
+	<input class='btn' type='submit' value='Find' data-value='find' ng-click='editsnrs.snrs(regData,$event)'/>
+	<input class='btn' type='submit' value='Update' ng-disabled='form3.$invalid' data-value='update' ng-click='editsnrs.snrs(regData,$event)'/>
+	<input class='btn' type='submit' value='Delete' data-value='delete' ng-click='editsnrs.snrs(regData,$event)'/>
+</form>
+</div>
+<div class='map' id='map'>
+</div>
+

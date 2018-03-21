@@ -1,0 +1,14 @@
+<div class="side">
+<!-- Custom Messages-->
+<div ng-show="snrslst.errorMsg" class="msg2">{{snrslst.errorMsg}}</div>
+<!-- Custom Messages-->
+<p>Select a sensor<p>
+    <select ng-model="snrslst.snrid" ng-options="item._id for item in snrslst.lst">
+        <option value='' label="Select a sensor"></option>
+    </select>
+    <input class='btn' type='submit' value='submit' ng-click="snrslst.snrs(snrid,$event)"/>
+<div ng-show="snrslst.snrid" class="chart1" id="chart1">
+</div>
+</div>
+<div class="map" id="map">
+</div>

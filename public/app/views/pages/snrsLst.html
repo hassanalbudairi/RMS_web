@@ -1,0 +1,24 @@
+<!-- Custom Messages--> 
+<div ng-show="snrlst.successMsg" class="msg1">{{snrlst.successMsg}}</div>
+<div ng-show="snrlst.errorMsg" class="msg2">{{snrlst.errorMsg}}</div>
+<!-- Custom Messages-->
+<div ng-show="!snrlst.errorMsg">
+<div class="side" ng-show="snrlst.lst">
+<table class="table" width="98%" >
+<tr>
+<th width=20px>ID</th>
+<th width=100px>Sim Number</th>
+<th width=80px>Activation date</th>
+<th>Location</th>
+</tr>
+    <tr ng-repeat="data in snrlst.lst">
+		<td width=20px>{{data._id}}</td>
+		<td width=100px>{{data.simNu}}</td>
+		<td width=80px>{{data.createdAt | date}}</td>
+		<td>{{data.loc}}</td>
+		</tr>
+</table>	
+</div>
+<div class="map" id="map">
+</div>
+</div>

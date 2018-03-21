@@ -1,0 +1,13 @@
+
+<div class="page4">
+<br>
+<!--form action="/loginpage" method="post" class="form4" -->
+<form  name="form4" method="post" class="form4" >
+	<input type="email" name="email" placeholder="Email address" required ng-model="login.usrData.email" >
+	<input type="password" name="password" placeholder="Password" required ng-model="login.usrData.password">
+	<input type="submit" value="Login"  ng-disabled="form4.$invalid"   ng-click="login.user(usrData)"/>
+    </form>
+</div>
+<!-- Custom Messages -->
+<div ng-show="login.successMsg" class="msg1">{{login.successMsg}}</div>
+<div ng-show="login.errorMsg" class="msg2">{{login.errorMsg}}</div>

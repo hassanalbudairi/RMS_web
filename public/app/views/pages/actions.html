@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" ng-app="userApp" ng-controller="loginCtrl as login">
+	<head>
+	<meta charset="utf-8">
+	<title>List of response actions for a rockfall warning message</title>
+	<!-- node js modules-->
+	<script src="../../../assets/js/jquery-3.1.1.min.js"></script>
+	<!-- Main Angular Files-->
+	<script src="../../../assets/js/angular.js"></script>
+	<script src="../../../assets/js/angular-route.js"></script>
+	<script src="../../../assets/js/angular-animate.js"></script>
+	<script src="../../../assets/js/angularjs-geolocation.min.js"></script>
+	<!-- Angular Config/Routes/Services-->
+	<script src="../../app.js"></script>
+	<script src="../../routes.js"></script>
+	<script src="../../services/authServices.js"></script>
+	<script src="../../services/gServices.js"></script>
+	<script src="../../services/d3Services.js"></script>
+	<script src="../../services/twilioServices.js"></script>
+	<!-- Angular Ctrls-->
+	<script src="../../controller/userCtrl.js"></script>
+	<!-- CSS files-->	
+	<link rel="stylesheet" href="../../../assets/css/style.css">
+	<link rel="stylesheet" href="../../../assets/css/print.css" media="print">
+	</head>
+
+<body ng-controller="actions as acts">
+<header class="onlyprint">
+<img src="../../../assets/images/qts_header.bmp">
+</header>
+<!------------------------- div for warning title-------------------------------->
+<div class="wrns1">
+	<table name="warnings actions" class="table">
+ <tr>
+	<th width=30px>No.</th>
+	<th width=45px>Sensor ID</th>
+	<th>Location</th>
+	<th>Date and time</th>
+	<th>Message</th>
+</tr>
+<tr>
+	<td>{{acts.lt4._id}}</td>
+	<td>{{acts.lt4.snr_id}}</td>
+	<td>{{acts.lt4.loc}}</td>
+	<td>{{acts.lt4.createdAt | date:"medium"}}</td>
+	<td>{{acts.lt4.msg}}</td>
+</tr>
+</table>
+</div>
+</br></br>
+<!------------------------- div for photos-------------------------------->
+<div class="actphoto" ng-show="acts.photos.length">
+<div class="actphotoleft">
+<select ng-model="photourl0" ng-options ="photo0.url as photo0.createdAt|date:'medium' for photo0 in acts.photos">
+<option value="">Select photo by date</option>
+</select>
+</br>
+<img ng-show="photourl0" src="../../../{{photourl0}}" style="width:250px;height:250px;padding:5px"/>
+</div>
+<div class="actphotoleft">
+<select ng-model="photourl1" ng-options ="photo1.url as photo1.createdAt|date:'medium' for photo1 in acts.photos">
+<option value="">Select photo by date</option>
+</select>
+</br>
+<img ng-show="photourl1" src="../../../{{photourl1}}" style="width:250px;height:250px;padding:5px"/>
+</div>
+</br></br>
+</div>
+<!------------------------- div for action buttons-------------------------------->
+<div class="noprint">
+<button onclick="window.print()">Print</button> 
+<button ng-hide="login.role == 'Client'" ng-click="acts.editAction()">Add action</button>
+<button ng-hide="login.role == 'Client'" ng-click="acts.ftcam()">Take photo (Front cam)</button>
+<button ng-hide="login.role == 'Client'" ng-click="acts.ftcam()">Take photo (Side cam)</button>
+<button ng-hide="login.role == 'Client'" ng-click="acts.edit = false">Cancel</button>
+</div>
+<!------------------------- div for action edit window-------------------------------->
+<div class="wrns2" ng-show="acts.edit">
+<p>{{login.fname}} {{login.lname}}: {{login.role}}</p>
+<textarea style="width:300px;height:150px" ng-model="acts.data.msg"></textarea>
+</br></br>
+<input placeholder="Change status" list="stat" required ng-model="acts.data.act"/>
+  <datalist id="stat">
+	<option>Active</option>
+	<option>Inspection</option>
+	<option>Fixed</option>
+  </datalist>
+<input class='btn' type='submit' value='submit' ng-click="acts.add(data)"/>
+</div>
+
+<!------------------------- div for action list-------------------------------->
+<div class="wrns2">
+<table ng-show="acts.lst" name="Actions list" class="table">
+<tr>
+	<th width=30px height=30px>Date</th>
+	<th width=150px>Actions</th>
+	<th width=50px>Taken by</th>
+	<th width=40px>Warning status</th>
+</tr>
+	<tr ng-repeat="act in acts.lst">
+	<td>{{act.createdAt | date:"medium"}}</td>
+	<td>{{act.act}}</td>
+	<td>{{act.fname}} {{act.lname}} role:{{act.role}}</td>
+	<td>{{act.stat}}</td>
+</tr>
+</table>
+</div>
+
+<footer class="onlyprint">
+<img src="../../../assets/images/qts_footer.bmp">
+</footer>	
+</body>
+</html>
+
+
+
+
+
+
+
+

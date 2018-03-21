@@ -1,0 +1,53 @@
+<br>
+<form name="userForm" class="form3" >
+	<input type="text" name="id" placeholder="ID" ng-model="register.regData.id">
+	<input type="text" name="fname" placeholder="First name" required ng-model="register.regData.fname">
+	<input type="text" name="lname" placeholder="Last name" required ng-model="register.regData.lname">
+	<input name="simNu" placeholder="SIM number +44" required pattern="^\+[4][4][7]\d{9}$" ng-model="register.regData.simNu">
+	<input type="email" name="email" placeholder="Email address" required ng-model="register.regData.email">
+	<input type="password" name="password" placeholder="Password" required ng-model="register.regData.password">
+	<input type="text" name="role" list="role" placeholder="Role" required ng-model="register.regData.role">
+  <datalist id="role">
+	<option>Client</option>
+	<option>Member</option>
+	<option>Admin</option>
+  </datalist>
+<br>
+	<input class='btn' type="submit" value="Add"	ng-disabled='form3.$invalid'  data-value="add" ng-click="register.users(regData,$event)"/>
+	<input class='btn' type="submit" value="Load all" data-value="load" ng-click="register.users(regData,$event)"/>
+	<input class='btn' type="submit" value="Find" 	  data-value="find" ng-click="register.users(regData,$event)"/>
+	<input class='btn' type="submit" value="Update"   ng-disabled='form3.$invalid' data-value="update" ng-click="register.users(regData,$event)"/>
+	<input class='btn' type="submit" value="Delete"   data-value="delete" ng-click="register.users(regData,$event)"/>
+</form>
+
+<!-- Custom Messages -->
+<div ng-show="register.successMsg" class="msg1">{{register.successMsg}}</div>
+<div ng-show="register.errorMsg" class="msg2">{{register.errorMsg}}</div>
+<!-- Custom Messages -->
+<!-- Users' list -->
+<div ng-show="register.lst">
+  <table class="table">
+   <tr>
+	<th name='col6' width=30px>ID</th>
+	<th name='col7'>First name</th>
+	<th name='col8'>Last name</th>
+	<th name='col9'>Phone number</th>
+	<th name='col10'>Email</th>
+	<th name='col11'>Role</th>
+	<th name='col12'>Added date</th>
+   </tr>
+   <tr ng-repeat="data in register.lst">
+    <td name='col6'>{{data._id}}</td>
+	<td name='col7'>{{data.fname}}</td>
+	<td name='col8'>{{data.lname}}</td>
+	<td name='col9'>{{data.simNu}}</td>
+    <td name='col10'>{{data.email}}</td>
+	<td name='col11'>{{data.role}}</td>
+	<td name='col12'>{{data.createdAt | date:"medium"}}</td>
+   </tr>
+  </table>
+<div>
+	
+	
+	
+	

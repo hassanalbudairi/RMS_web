@@ -1,0 +1,507 @@
+html{font-family:sans-serif; -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%}
+/*---------------------------------- General layout ----------------------------------*/
+.side{
+	position:relative;
+	width:45%;
+	float:left
+}
+.map{
+	position:relative;
+	width:54%;
+	min-height:700px;
+	float:right;
+	margin-top:10px
+}
+.chart1{
+	position: relative;
+	top: 60px;
+	width:80%;
+	height:500px
+}
+.table{
+	table-layout:fixed;
+	font-size: 80%;
+	border: 0;
+    word-wrap:normal;
+    border-collapse:collapse;
+	text-align: center;
+}
+.table th{background-color: #ff5a00;color:white;border:1px solid black;padding:5px}
+.table td{border:1px solid black;padding:3px}
+/* Edit list page*/
+.msg1,ul{display:block;color: green}
+.msg2,ul{display:block;color:red}
+h3{display:block;font-weight:bold;text-decoration: underline}
+
+
+/*----------------------------index-----------------------------------------*/
+.header{width:auto;background-color:#ff5a00;height:120px}
+.img-responsive{float: left;padding-top:20px;padding-left:15px}
+.userid{
+	position: absolute;
+	right:0px;
+	display:block;
+	height:50px;
+    overflow: hidden;
+	color: white;
+	font-weight: bold;
+	padding-right:10px;
+	line-height: 3px;
+	font-size: 16px;
+	text-align:right
+}
+.body{
+	display: block;
+	position: absolute;
+	top:3.5cm;
+	width:98.5%	
+}
+/********************* Dropdown ******************************/
+ .dropbtn { /*Dropdown Button*/
+    background-color: #ff5a00;
+    color: white;
+    padding: 10px;
+	margin:0px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+	font-weight: bold
+}
+.dropbtn:hover,.dropbtn:focus{background-color: #2980B9;} /*Dropdown button on hover & focus*/
+.dropdown{ /* The container <div> - needed to position the dropdown content*/
+	float:right;
+    position: relative;
+    display: inline;
+	top:65px;
+	right:0px;
+	height:45px;
+	text-transform: uppercase;
+	font-weight: bold
+}
+.dropdown-content{ /*Dropdown Content (Hidden by Default)*/
+    display: none;
+    position: fixed;
+    background-color: #ff5a00;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1
+}
+.dropdown-content a { /* Links inside the dropdown */
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block
+}
+.dropdown-content a:hover {background-color: #2980B9} /* Change color of dropdown links on hover */
+.show {display:block;} /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+/********************* Dropdown ******************************/
+/* ------------------------------- Home page --------------------------------*/
+.pri{
+	font-family:Verdana;
+	color: #ff5a00;
+	font-size: 1500%;
+	font-weight: bold;
+	text-decoration:underline;
+	text-align:center;
+	padding-top:3cm;
+	text-transform:uppercase;
+	letter-spacing:16px;
+	margin:0px
+	}	
+.sec{
+	font-family:Verdana;
+	font-weight: bold;
+	color: #ff5a00;
+	text-align:center;
+	text-transform:uppercase;
+	padding:0px;
+	margin:0px;
+	overflow: hidden;
+	word-wrap: break-word
+	}
+.footer{
+	position: fixed;
+	bottom: 5px;
+	right: 20px
+}
+.footer p{text-decoration: underline}
+.footer a {display: inline-block;padding-right:12px}
+.footer img{height:30px;width:90px;display: block}
+.footer a:hover img {transform: scale(1.1)}
+/* ------------------------------- About page --------------------------------*/
+.rms_para{
+	display: block;
+	float:left;
+	width: 56%;
+	text-align: left;
+	padding: 10px
+}
+.rms_para h1{font-size: 105%;text-decoration: underline;font-weight: bold}
+.rms_para p li{font-size: 105%;line-height:120%}
+.figs{width: 40%;float:right}
+.figs img{
+	height: 100%;
+	width: 100%;
+	border: solid;
+	display: block	
+}
+figcaption {
+  font-size: 90%;
+  display: block;
+  padding: 5px;
+  font-weight: bold
+}
+/* ------------------------------- Action page --------------------------------*/
+header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
+.wrns1{position:absolute;top:30px;clear:both}
+.wrns2{
+	position:relative;
+	top:80px;
+	clear:both
+}
+.noprint{
+	position:relative;
+	display: block;
+	top:70px;
+	clear:both
+}
+.noprint button{
+	background-color:#ff5a00;
+    border:none;
+    color:white;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    font-size:16px;
+    margin:4px 2px;
+    cursor:pointer;	
+	padding:10px 5px 10px 5px	
+}
+.noprint button:hover:enabled{background-color:#008CBA;} /* Blue */
+/*General button css*/
+.btn{
+	background-color:rgb(255,90,0);
+    border:none;
+    color:white;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    font-size:14px;
+    cursor:pointer;	
+	padding:4px 7px 4px 7px;
+	-webkit-appearance: none
+}
+
+.btn:hover:enabled{background-color:#008CBA; alpha:1} /* Blue */
+.actphoto{position:relative;top:70px;width:520px}
+.actphotoleft{float:left;display:inline-block;width:50%}
+.table input[name='action_btn']{
+	width:50px;
+	height:30px;
+	padding:0px;
+	cursor:pointer;
+	background-color:#ff5a00;
+    border:none;
+    color:white;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    font-size:12px;
+    margin:4px 2px
+}
+.table input[name='action_btn']:hover:enabled{background-color:#008CBA;} /* Blue */
+
+/* ------------------------------- Edit page --------------------------------*/
+.form3 input{display: inline-block;margin: 3px 3px 3px 3px}
+/* ------------------------------- Monitor individual sensor page --------------------------------*/
+/* ------------------------------- Overview sensors page --------------------------------*/
+/* ------------------------------- warnings page --------------------------------*/
+/*table*/
+/* image gallary */
+.warpper {
+	width:100%;
+	height:100%;
+	padding: 5px
+}
+.imgs {
+	margin:5px 5px;
+	float: left;
+	position: relative;
+	width:100%
+}
+.imgs img{
+	float: left;
+	position: relative;
+	width:30px;
+	height:30px;
+	padding: 5px;
+	filter: grayscale(100%);
+	transition: 1s;
+	border: 1px solid green
+}
+.imgs img:hover{filter: grayscale(0);transform: scale(1.1)}
+@-webkit-keyframes invalid {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+@-moz-keyframes invalid {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+/*
+@-o-keyframes invalid {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+*/
+@keyframes invalid {
+  from { background-color: red; }
+  to { background-color: inherit; }
+}
+.invalid {
+  -webkit-animation: invalid 3s infinite; /* Safari 4+ */
+  -moz-animation:    invalid 3s infinite; /* Fx 5+ */
+  -o-animation:      invalid 3s infinite; /* Opera 12+ */
+  animation:         invalid 3s infinite; /* IE 10+ */
+}
+/* ------------------------------- login page --------------------------------*/
+.page4{width: 360px;padding: 8% 0 0;margin: auto}
+
+.form4 {
+	position: relative;
+	z-index: 1;
+	background: #ff5a00;
+	max-width: 360px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form4 input{
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+.form4 input[type='submit']{cursor: pointer}
+.form4 input[type='submit']:hover:enabled{background-color:#008CBA} /* Blue */
+/* ------------------------------- Register page --------------------------------*/
+/* ------------------------------- Media screen --------------------------------*/
+@media screen and (max-width:768px){
+.header{height:80px}
+.pri{font-size: 1050%}
+.sec{font-size: 70%}
+.dropdown{clear:left;top:8px}
+.dropbtn {padding:8px;font-size:12px;}
+.img-responsive{height:34px;width:80px;padding:5px 0px 0px 0px;}
+.userid{height:42px;font-size: 14px;}
+.dropdown-content{min-width:120px}
+.dropdown-content a {padding:10px 12px; font-size:11px}
+.rms_para{width:95%}
+.figs{width: 100%}
+.actphotoleft{width:90%}
+.side{width:97%; float:none}
+.map{width: 97%; float:none}
+.chart1{width:97%;float:none;padding-bottom:40px}
+.table th[name='col1'],td[name='col1'],th[name='col2'],td[name='col2']{display:none}
+.table th[name='col12'],td[name='col12']{display:none}
+.table th[name='col4'],td[name='col4']{width:70px}
+.table th[name='col3'],td[name='col3'],th[name='col5'],td[name='col5']{width:120px}
+}
+@media screen and (max-width:480px){
+.pri{font-size: 700%}
+.sec{font-size: 60%}
+.footer img{height:20px;width:60px}
+.footer p{font-size:14px}
+.table th[name='col5'],td[name='col5']{display:none}
+.table th[name='col3'],td[name='col3']{width:80px}
+.table th[name='col10'],td[name='col10']{display:none}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+.nav {
+	position:absolute;
+	width:740px;
+	display: block;
+	float:left;
+	list-style-type: none;
+	color: white;
+	font-weight: bold;
+	top:100px;
+}
+.nav li {
+	float:left;
+	list-style-type:none;
+}
+.nav li a{
+	background-color: #ff5a00;
+	color: white;
+    height: 30px;
+    text-align: center;
+    display: block;
+    border-radius:22px;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 8px 8px 2px 8px;
+	margin:2px 2px 2px 2px;	
+}
+
+/* RMS monitoring page*/
+/* RMS overview page*/
+
+
+
+/*
+
+.form1 input{
+	display: inline-block;
+	margin: 3px 3px 3px 3px;
+}
+.form1 input[name='lat'], input[name='lng'] {
+	width: 70px;
+}
+.form1 input[name='simNu']{
+	width: 150px;
+}
+.form1 input[name='loc']{
+	width: 300px;
+}
+
+.form2 input {
+display: inline-block;
+margin: 3px 3px 3px 3px;
+width: 80px;	
+}
+.form2 input[name='editid'] {
+	width: 40px;
+}
+.form2 input[name='editlat'], input[name='editlng'] {
+	width: 70px;
+}
+.form2 input[name='editsimNu'] {
+	width: 150px;
+}
+.form2 input[name='editloc'] {
+	width: 250px;
+}
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------ Screen size responsive ----------------------------------*/
+
+/*
+@media TV and (min-width:1200px){}
+
+@media screen and (max-width:768px){}
+
+@media screen and (max-width:480px){}
+
+
+@media screen and (max-width:1499px){
+.body{width:98%}
+.nav{width:50%}
+.chart1{width:94%}
+}
+
+@media screen and (max-width:720px){
+.header{height:120px}
+.img-responsive{max-width: 28%; padding-top:8px}
+.dropdown{width:100%; top:0px; float:right}
+.dropbtn{padding-left: 5px; padding-right: 5px; margin-left:5px}
+.pri{font-size:150px; padding-top:4cm}
+.sec{font-size:10px}
+.body{width:97%}
+
+
+.nav{width:100%}
+.rms_para{width:95%}
+.figs{width: 100%}
+.chart1{width:95%}
+}
+
+@media screen and (max-width:570px){
+.header{height:90px}
+.img-responsive{max-width: 20%; padding-top:6px}
+.dropbtn{margin-top: 8px; padding-top: 8px; padding-bottom: 2px; padding-left:2px; padding-right:2px; font-size: 11px}
+.dropdown-content a {font-size: 10px; padding: 8px 8px}
+.body{top:2.6cm; width:94%}
+.chart1{width:350px}
+.actphoto{width:320px}
+.actphotoleft{display:block}
+
+}
+@media screen and (max-width:375px){
+.header{height:70px}
+.userid{font-size: 10px}
+.dropbtn{font-size: 10px}
+.pri{font-size:75px; padding-top:2cm}
+.sec{font-size:7px}
+.body{top:2.1cm; width:94%}
+.nav{width:350px}
+.chart1{width:350px}
+.actphoto{width:320px}
+.actphotoleft{display:block}
+.table th[name='col1'],td[name='col1'],th[name='col2'],td[name='col2']{display:none}
+.table th[name='col4'],td[name='col4']{width:40px}
+.table th[name='col3'],td[name='col3'],th[name='col5'],td[name='col5']{width:80px}
+}
+
+*/
+
+

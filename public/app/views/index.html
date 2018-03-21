@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" ng-app="userApp" ng-controller="loginCtrl as login">
+  <head>
+  <base href="/">
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rockfall Monitoring System (RMS) website">
+    <meta name="author" content="Hassan Al-Budairi">
+	<!-- node js modules-->
+	<script src="assets/js/jquery-3.1.1.min.js"></script>
+	<script src="assets/js/d3.min.js"></script>
+	<script type="text/javascript" src="assets/js/lightbox-plus-jquery.min.js"></script>
+	<script src="assets/js/jquery-ui.min.js"></script>
+	
+	<!-- Main Angular Files-->
+	<script src="assets/js/angular.js"></script>
+	<script src="assets/js/angular-route.js"></script>
+	<script src="assets/js/angular-animate.js"></script>
+	<script src="assets/js/angularjs-geolocation.min.js"></script>
+	<!-- Angular Config/Routes/Services-->
+	<script src="app/app.js"></script>
+	<script src="app/routes.js"></script>
+	<script src="app/services/authServices.js"></script>
+	<script src="app/services/gServices.js"></script>
+	<script src="app/services/d3Services.js"></script>
+	<script src="app/services/twilioServices.js"></script>
+	<!-- Angular Ctrls-->
+	<script src="app/controller/userCtrl.js"></script>
+	<!-- css-->
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/lightbox.min.css">
+	<link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+	<!-- Google Maps API -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBevPHuAJdCiJAbSoXVlbqPnc4Sz8l64OU"></script>
+	<script src="assets/js/markerclusterer.js"></script>
+  </head>
+<div class="header">
+	<img class="img-responsive" src="assets/images/qts_logo.png" alt="QTS Group">
+<div class="userid">
+	<p ng-if="login.fname">{{login.fname}} {{login.lname}}: {{login.role}}</p>
+</div>
+
+<div class="dropdown">
+	<button onclick="location.href='/';" class="dropbtn">Home</button>
+	<button onclick="myFunction()" class="dropbtn">RMS Monitoring</button>
+<!-- Dropdown menu-->
+<div id="myDropdown" class="dropdown-content">
+	<a href="/rmsMonitoring/listSensors">Overview</a>
+	<a href="/rmsMonitoring/editlist">Edit</a>
+	<a href="/rmsMonitoring/monitorSensors">Monitor sensor</a>
+	<a href="/rmsMonitoring/warnings">Warnings</a>
+</div>
+	<button onclick="location.href='/about';" class="dropbtn">About</button>
+	<button onclick="location.href='/contact';" class="dropbtn">Contact</button>
+	<button ng-if="!login.isLoggedin" onclick="location.href='/login';" class="dropbtn">login</button>
+	<button ng-if="login.isLoggedin" onclick="location.href='/logout';" class="dropbtn">logout</button>
+</div>
+</div>
+
+<script>
+function myFunction(){
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+<body>
+<div class="body" ng-view>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
