@@ -104,7 +104,7 @@ Models.users.findOne({'simNu': msgFrom},function(err,doc){
         client.messages.create({
 		to: contact.simNu,
 		from: process.env.Twilio_no,
-		body: 'Hi '.concat(contact.fname)+'\xa0'.concat(contact.lname)+' Warning message from sensor # '.concat(doc._id)+' For more details, visit https://d82b4235.ngrok.io/rmsMonitoring/warnings'
+		body: 'Hi '.concat(contact.fname)+'\xa0'.concat(contact.lname)+' Warning message from sensor # '.concat(doc._id)+' For more details, visit http://www.qtsrms.com/rmsMonitoring/warnings'
 		}, function(err, message) {
 		if (err){
 		console.log(err);
@@ -123,26 +123,4 @@ Models.users.findOne({'simNu': msgFrom},function(err,doc){
 	Models.addDataIndSnr(filename,msgBody);
 	}
 	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
