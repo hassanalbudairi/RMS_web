@@ -1,4 +1,5 @@
-<br>
+</br>
+<div ng-show="login.role == 'Admin'">
 <form name="userForm" class="form3" >
 	<input type="text" name="id" placeholder="ID" ng-model="register.regData.id">
 	<input type="text" name="fname" placeholder="First name" required ng-model="register.regData.fname">
@@ -46,5 +47,7 @@
 	<td name='col12'>{{data.createdAt | date:"medium"}}</td>
    </tr>
   </table>
-<div>
+</div>
+
+</div>
 <div id="divpopup" style="display:none"><p>login is required</p></div>

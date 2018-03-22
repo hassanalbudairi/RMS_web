@@ -21,7 +21,6 @@
 	<script src="../../controller/userCtrl.js"></script>
 	<!-- CSS files-->	
 	<link rel="stylesheet" href="../../../assets/css/style.css">
-	<link rel="stylesheet" href="../../../assets/css/print.css" media="print">
 	</head>
 
 <body ng-controller="actions as acts">
@@ -32,26 +31,26 @@
 <div class="wrns1">
 	<table name="warnings actions" class="table">
  <tr>
-	<th width=30px>No.</th>
-	<th width=45px>Sensor ID</th>
-	<th>Location</th>
-	<th>Date and time</th>
-	<th>Message</th>
+	<th name='col16'>No.</th>
+	<th name='col17'>Sensor ID</th>
+	<th name='col18'>Location</th>
+	<th name='col19'>Date and time</th>
+	<th name='col20'>Message</th>
 </tr>
 <tr>
-	<td>{{acts.lt4._id}}</td>
-	<td>{{acts.lt4.snr_id}}</td>
-	<td>{{acts.lt4.loc}}</td>
-	<td>{{acts.lt4.createdAt | date:"medium"}}</td>
-	<td>{{acts.lt4.msg}}</td>
+	<td name='col16'>{{acts.lt4._id}}</td>
+	<td name='col17'>{{acts.lt4.snr_id}}</td>
+	<td name='col18'>{{acts.lt4.loc}}</td>
+	<td name='col19'>{{acts.lt4.createdAt | date:"medium"}}</td>
+	<td name='col20'>{{acts.lt4.msg}}</td>
 </tr>
 </table>
 </div>
-</br></br>
+</br></br></br></br>
 <!------------------------- div for photos-------------------------------->
 <div class="actphoto" ng-show="acts.photos.length">
 <div class="actphotoleft">
-<select ng-model="photourl0" ng-options ="photo0.url as photo0.createdAt|date:'medium' for photo0 in acts.photos">
+<select class="noprint1" ng-model="photourl0" ng-options ="photo0.url as photo0.createdAt|date:'medium' for photo0 in acts.photos">
 <option value="">Select photo by date</option>
 </select>
 </br>
@@ -92,16 +91,16 @@
 <div class="wrns2">
 <table ng-show="acts.lst" name="Actions list" class="table">
 <tr>
-	<th width=30px height=30px>Date</th>
-	<th width=150px>Actions</th>
-	<th width=50px>Taken by</th>
-	<th width=40px>Warning status</th>
+	<th name='col21'>Date</th>
+	<th name='col22'>Actions</th>
+	<th name='col23'>Taken by</th>
+	<th name='col24'>Warning status</th>
 </tr>
 	<tr ng-repeat="act in acts.lst">
-	<td>{{act.createdAt | date:"medium"}}</td>
-	<td>{{act.act}}</td>
-	<td>{{act.fname}} {{act.lname}} role:{{act.role}}</td>
-	<td>{{act.stat}}</td>
+	<td name='col21'>{{act.createdAt | date:"medium"}}</td>
+	<td name='col22'>{{act.act}}</td>
+	<td name='col23'>{{act.fname}} {{act.lname}} role:{{act.role}}</td>
+	<td name='col24'>{{act.stat}}</td>
 </tr>
 </table>
 </div>
