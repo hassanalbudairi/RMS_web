@@ -1,4 +1,4 @@
-angular.module('userControllers',['authServices','geolocation','gService', 'd3Service','twilioService'])
+angular.module('userControllers',['authServices','geolocation','gService', 'd3Service'])
 /***********************************************************************************************************************/
 /********************************************* REGISTER USERS CTRL ************************************************************/
 /*********************************************************************************************************************/
@@ -11,7 +11,7 @@ angular.module('userControllers',['authServices','geolocation','gService', 'd3Se
 	app.lst = app.successMsg = app.errorMsg = false;
 	$http.post('/api/addUser',app.regData).then(function(data){
 	if(data.data.success){
-		app.successMsg = data.data.message
+		app.successMsg = data.data.message;
 	}else{
 		app.errorMsg = data.data.message
 	}

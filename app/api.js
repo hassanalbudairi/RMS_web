@@ -1,8 +1,11 @@
 const Models  = require('./models');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+var twilio = require('twilio');
+const client = twilio(process.env.accountSid,process.env.authToken);
+
 module.exports = function(router){
-	//add user
+//add user
 router.post('/addUser', (req,res,next)=>{
 if (req.body.fname==''||req.body.fname==null||req.body.lname==''||req.body.lname==null||req.body.email==''||req.body.email==null||req.body.password==''||req.body.password ==null||req.body.role==''||req.body.role ==null) res.json({success: false, message:'Ensure First name, Last name, Email, password and role are provided'})
 	else {
@@ -14,10 +17,25 @@ if (req.body.fname==''||req.body.fname==null||req.body.lname==''||req.body.lname
 	user.password = req.body.password;
 	user.role = req.body.role;
 	user.save((err)=> {
-	if(err)	res.json({success:false,message:'Email already exists' +err});
-	else res.json({success:true, message:'User created'});
-	});
+	if(err)	res.json({success:false,message:'Email/phone number already exists, please enter diffrent detials'});
+	else{
+		//send welcome message
+	client.messages.create({
+		to: user.simNu,
+		from: process.env.Twilio_no,
+		body: 'Hi '.concat(user.fname)+'\xa0'.concat(user.lname)+', You opted-in as a '.concat(user.role)+' in Rockfall Moniotring System team, to opt out, reply with "RMS out"'
+		}, function(err, message) {
+		if (err){
+		console.log(err);
+		}else{
+		console.log(message.sid)
 		}
+		});
+	res.json({success:true, message:'User created'});
+	}
+	});
+		
+	}
 });
 //list users
 router.post('/usersList', (req,res,next)=>{
@@ -73,9 +91,6 @@ router.post('/auth',(req,res)=>{
 	});
 	});
 	
-	
-	
-	
 //verify and decoded token middleware that will be used with /current usr route
 router.use(function(req,res,next){
 	var token = req.body.token||req.body.query||req.headers['x-access-token'];
@@ -94,14 +109,10 @@ router.use(function(req,res,next){
 	}
 });
 
-
-
-
 //current user
 router.post('/currentusr',(req,res)=>{
 	res.send(req.decoded);
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Sensors routes
 //load sensors list
@@ -111,13 +122,6 @@ router.get('/snrslst', (req,res)=>{
 	else    				   res.json({success:true, message:'Sensors\' list created', data:data});
 	}).sort('_id');
 });
-
-
-
-
-
-
-
 //Add sensors
 router.post('/addsnrs', (req,res,next)=>{
 if (req.body.lat==''||req.body.lat==null||req.body.lng==''||req.body.lng==null||req.body.simNu==''||req.body.simNu==null||req.body.loc==''||req.body.loc ==null){
@@ -144,16 +148,6 @@ if (req.body.lat==''||req.body.lat==null||req.body.lng==''||req.body.lng==null||
 	});
 	}
 });
-
-
-
-
-
-
-
-
-
-
 // find sensor
 router.post('/findsnr',(req,res)=>{
 	Models.sensordb.findById(req.body.id,function(err,data){
@@ -242,31 +236,6 @@ Models.actiondb(req,res);
 router.post('/indwarns',(req,res)=>{
 Models.findwrnsdb(req.body.filename,res);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //upload photo to db
 router.post('/uploadphotos',function(req,res){
 var item = new Models.photosdb();
@@ -278,7 +247,6 @@ if(err) res.json({success:false,message:'Photo not saved!' +err});
 else    res.json({success:true,message:'Photo saved'});
 });
 });
-
 //get photo data for warning page
 router.post('/photoswrns',(req,res)=>{
 	console.log(req.body.simNu);
@@ -286,48 +254,14 @@ router.post('/photoswrns',(req,res)=>{
 	if(err||data==null||data.length<1) res.json({success:false,message:'No photo found'});
 	else                               res.json({success:true, message:'photos loaded', data:data});	
 		}).sort('createdAt');
-	
 });
-
-
 //get twilio
 router.post('/twiliomsg',function(req,res){
-	
 	var msgFrom = req.body;
 	var msgBody = req.body.Body;
 	console.log(msgFrom);
 	console.log(msgBody);
-	
-	
-	
 	res.json({success:true, message:'twilio message'});	
 });
-
-
-
-
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 return router;
 }
-
-
-
-
-
-
-
-

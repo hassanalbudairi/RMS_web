@@ -22,7 +22,8 @@ var UserSchema = new mongoose.Schema({
           },
           message: '{VALUE} is not a valid phone number!'
         },
-        required: [true, 'User phone number required']
+        required: [true, 'User phone number required'],
+		unique: [true, 'Phone number already exists']
       },
   email   : {type: String, lowercase: true, unique: true, required: true},
   password: {type: String, required: true},
@@ -66,14 +67,6 @@ var snrDataSchema = new Schema({
 snrDataSchema.plugin(autoIncrement.plugin,{model:'sensordb', startAt:1});
 exports.sensordb = mongoose.model('sensordb',snrDataSchema,'sensordb');
 //////////////////////------------Health checking schema ------------------------////////////////////////
-
-
-
-
-
-
-
-
 // Create individual sensor db schema
 exports.indSnr = function(filename,res){
 	let db = mongoose.connection.db;
@@ -142,13 +135,6 @@ var item ={
 	*/
 }	
 }
-
-
-
-
-
-
-
 
 //rename ind snr when deleting records
 exports.renamedb = function(oldname,newname){
@@ -240,7 +226,3 @@ var photosSchema = new Schema({
 },{collection:'photosdb',timestamps: true});
 photosSchema.plugin(autoIncrement.plugin,{model:'photosdb', startAt:1});
 exports.photosdb = mongoose.model('photosdb',photosSchema,'photosdb');
-
-
-
-
