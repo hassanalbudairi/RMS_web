@@ -219,8 +219,6 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 /*table*/
 /* image gallary */
 .warpper {
-	width:100%;
-	height:100%;
 	padding: 5px
 }
 .imgs {
@@ -314,6 +312,7 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 .table th[name='col3'],td[name='col3'],th[name='col5'],td[name='col5']{width:120px}
 }
 @media screen and (max-width:480px){
+.userid{font-size: 10px;}
 .pri{font-size: 700%}
 .sec{font-size: 60%}
 .footer img{height:20px;width:60px}
