@@ -212,7 +212,7 @@ Models.warningsdb.find({}, function (err, data){
 	else    				   res.json({success:true, message:'Warnings data listed', data:data});
 	}).sort('_id');
 });
-/*
+
 //temp to add data to warningsdb
 router.post('/addwarnings',function(req,res){
 	var item = new Models.warningsdb();
@@ -226,7 +226,7 @@ router.post('/addwarnings',function(req,res){
 	else    res.json({success:true,message:'Warning saved'});
 });
 });
-*/
+
 //update warning status
 router.post('/updatewarnings',function(req,res){
 	Models.warningsdb.findOneAndUpdate({snr_id: req.body.snr_id, createdAt: req.body.createdAt},{$set: {act:req.body.stat}},{new:true},function(err,data){
