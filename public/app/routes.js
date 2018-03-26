@@ -59,29 +59,21 @@ var app = angular.module('appRoutes',['ngRoute'])
 		authonticated: true
 	})
 	
+	.when('/rmsMonitoring/action', {
+		templateUrl: 'app/views/pages/action.html',
+        controller: 'actions',
+		controllerAs: 'acts',
+		authonticated: true
+	})
 	
+	.when('/sms', {
+		templateUrl: 'app/views/pages/sms.html',
+        controller: 'messages',
+		controllerAs: 'sms',
+		authonticated: true
+	})
 	
-	
-	/*
-	//Twilio messages
-	.when('/message', {
-		resolve: {redirect: 'twilioService'}})
-		
-		*/
-		
-		
-		
-		
-		
-		
-		
-		
 .otherwise({ redirectTo: '/' });
-
-
-
-
-
 $locationProvider.html5Mode({ enabled: true, requireBase: false }); // Required to remove AngularJS hash from URL (no base is required in index file)
 });
 //here is on

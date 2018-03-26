@@ -1,0 +1,24 @@
+<title>Send sms messages to activate sensors</title>
+<p>This page to send sms text to sensors </p>
+
+<div ng-show="login.role == 'Admin'">
+
+<!-- Custom Messages--> 
+<div ng-show="sms.successMsg" class="msg1">{{sms.successMsg}}</div>
+<div ng-show="sms.errorMsg" class="msg2">{{sms.errorMsg}}</div>
+
+<select ng-model="sms.data.simNu" ng-options="item.simNu for item in sms.lst2">
+        <option value='' label="Select a sensor"></option>
+    </select>
+	</br></br>
+<textarea style="width:200px;height:100px" ng-model="sms.data.msg"></textarea>
+<input class="btn" name="Send message" type='submit' value="Send message" ng-click="sms.send(data)"/>
+<input class="btn" name="clear" type='submit' value="clear" ng-click="sms.clear()"/>
+</br></br>
+<p>1234 STATUS</p>
+<p>1234 SHOCK:1-5;10-15</p>
+<p>1234 SHOCK:OFF</p>
+<p>1234 LOWB:40</p>
+<p>1234 TLLOWB: Low Battery 40%</p>
+</div>
+<div id="divpopup" style="display:none"><p>login is required</p></div>

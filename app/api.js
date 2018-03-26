@@ -1,8 +1,8 @@
 const Models  = require('./models');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-var twilio = require('twilio');
-const client = twilio(process.env.accountSid,process.env.authToken);
+//const fs = require('fs');
+//var twilio = require('twilio');
+const client = require('twilio')(process.env.accountSid,process.env.authToken);
 
 module.exports = function(router){
 //add user
@@ -255,13 +255,25 @@ router.post('/photoswrns',(req,res)=>{
 	else                               res.json({success:true, message:'photos loaded', data:data});	
 		}).sort('createdAt');
 });
-//get twilio
-router.post('/twiliomsg',function(req,res){
-	var msgFrom = req.body;
-	var msgBody = req.body.Body;
-	console.log(msgFrom);
-	console.log(msgBody);
-	res.json({success:true, message:'twilio message'});	
+//send twilio sms to sensors
+router.post('/twiliosms',function(req,res){
+client.messages.create(
+  {
+    to: req.body.simNu.simNu,
+    from: process.env.Twilio_no,
+    body: req.body.msg,
+  },
+  (err, message)=>{
+   if (err) res.json({success:false,message:'sms not sent'});
+   else     res.json({success:true,message:'sms sent successfully '+ message.sid});
+  }
+);	
 });
+
+
+
+
+
+
 return router;
 }

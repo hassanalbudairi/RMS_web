@@ -252,7 +252,7 @@ gService.googleMapService(a);
 /***********************************************************************************************************************/
 /********************************************* WARNINGS CTRL ************************************************************/
 /*********************************************************************************************************************/
-.controller('warnings', function($http,$window,gService,$timeout){
+.controller('warnings', function($http,$window,gService,$timeout,$location){
 	var app = this;
 	app.sts =['Active','Inspection','Fixed']; 
 	app.lst2 = app.lst3 = app.successMsg = app.errorMsg = app.errorMsg2 = app.errorMsg3 = false;
@@ -306,7 +306,10 @@ app.action = function(wrn){
 app.lst4 = wrn;
 $window.ScopeToShare = app;
 $timeout(function(){
-var Newwindow = $window.open('app/views/pages/actions.html','newwindow','left=0,top=0,width=400,height=250,toolbar=no,menubar=no,scrollbars=yes,status=no,location=no');	
+	newpath= $location.$$path.slice(0,15).concat('action');
+window.open(newpath,'newwindow','left=0,top=0,width=400,height=250,toolbar=no,menubar=no,scrollbars=yes,status=no,location=no');
+	/*
+var Newwindow = $window.open('app/action.html','newwindow','left=0,top=0,width=400,height=250,toolbar=no,menubar=no,scrollbars=yes,status=no,location=no');*/	
 }, 200);
 };
 })
@@ -362,12 +365,35 @@ Auth.getUser().then(function(data){
 });
 }
 }
+})
+/***********************************************************************************************************************/
+/********************************************* SMS CTRL ************************************************************/
+/*********************************************************************************************************************/
+.controller('messages', function($http,$window){
+var app = this;
+app.lst2=false;
+$http.get('/api/snrslst')
+	.then(function(data){
+	if(data.data.success){
+		app.lst2 = data.data.data;
+		app.successMsg = data.data.message
+	}else{
+		app.errorMsg = data.data.message
+	}
+	});
+app.send= function(data){
+$http.post('/api/twiliosms',app.data)
+	.then(function(data){
+	if(data.data.success){
+		app.successMsg = data.data.message
+	}else{
+		app.errorMsg = data.data.message
+	}
+	});	
+	}
+app.clear =function(){
+	$window.location.href = '/sms';
+	$window.location.reload;
+	
+}
 });
-
-
-
-
-
-
-
-

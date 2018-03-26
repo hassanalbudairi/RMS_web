@@ -193,7 +193,7 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 .noprint button:hover:enabled{background-color:#008CBA;} /* Blue */
 /*General button css*/
 .btn{
-	background-color:rgb(255,90,0);
+	background-color:#ff5a00;
     border:none;
     color:white;
     text-align:center;
@@ -206,8 +206,9 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 }
 
 .btn:hover:enabled{background-color:#008CBA; alpha:1} /* Blue */
-.actphoto{position:relative;top:70px;width:520px}
+.actphoto{position:relative;top:70px;width:750px}
 .actphotoleft{float:left;display:inline-block;width:50%}
+.actphotoleft{float:right;display:inline-block;width:50%}
 .table input[name='action_btn']{
 	width:50px;
 	height:30px;
@@ -302,35 +303,6 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 .form4 input[type='submit']{cursor: pointer}
 .form4 input[type='submit']:hover:enabled{background-color:#008CBA} /* Blue */
 /* ------------------------------- Register page --------------------------------*/
-/* ------------------------------- actions page print --------------------------------*/
-@media print {
-@page {margin: 0mm}
-body {margin: 53mm 5mm 20mm 5mm}
-thead {display: table-header-group} 
-tfoot {display: table-footer-group}
-header.onlyprint {
-	position: fixed; /* Display only on print page (each) */
-	top: 0; /* Because it's header */
-	margin:0
-    }
-footer.onlyprint {
-	position: fixed;
-    bottom: 0; /* Because it's footer */
-	margin:0
-    }
-.noprint{display: none}
-.wrns1{top: 200px}
-/*table 1*/
-.table th[name='col16'],td[name='col16'],th[name='col17'],td[name='col17']{font-size:14px}
-.table th[name='col18'],td[name='col18']{width:250px;font-size:14px}
-.table th[name='col19'],td[name='col19']{width:100px;font-size:14px}
-.table th[name='col20'],td[name='col20']{width:250px;font-size:14px}
-/*table 2*/
-.table th[name='col21'],td[name='col21']{width:90px;font-size:14px}
-.table th[name='col22'],td[name='col22']{width:440px;font-size:14px}
-.table th[name='col23'],td[name='col23']{width:140px;font-size:14px}
-.table th[name='col24'],td[name='col24']{width:90px;font-size:14px} 
-}
 
 /* ------------------------------- Media screen --------------------------------*/
 @media screen and (max-width:768px){
@@ -364,3 +336,58 @@ footer.onlyprint {
 .table th[name='col3'],td[name='col3']{width:80px}
 .table th[name='col10'],td[name='col10']{display:none}
 }
+
+
+/* ------------------------------- actions page print --------------------------------*/
+
+
+
+@media print{
+	@page{
+	size: A4;
+	margin: 5mm 0mm 5mm 0mm
+	}	
+thead {display: table-header-group} 
+tfoot {display: table-footer-group}
+/*HEADER*/
+header.onlyprint {
+	display:block;
+	position: absolute; /* Display only on print page (each) */
+	top: 0; /* Because it's header */
+	margin:0px;
+	padding:0px;
+	width:100%;
+	border:double;
+	border-color:blue;
+	overflow:none
+    }
+/*Footer*/	
+footer.onlyprint {
+	display:block;
+	position: absolute;
+    bottom: 0px; /* Because it's footer */
+	margin:0px;
+	padding:0px;
+	width:100%;
+	border:double;
+	border-color:green;
+	overflow:none
+    }
+.noprint{display: none}
+.wrns1{top: 200px;border:dotted;overflow:none}
+/*table 1*/
+.table th[name='col16'],td[name='col16'],th[name='col17'],td[name='col17']{font-size:14px}
+.table th[name='col18'],td[name='col18']{width:250px;font-size:14px}
+.table th[name='col19'],td[name='col19']{width:100px;font-size:14px}
+.table th[name='col20'],td[name='col20']{width:250px;font-size:14px}
+/*table 2*/
+.table th[name='col21'],td[name='col21']{width:90px;font-size:14px}
+.table th[name='col22'],td[name='col22']{width:440px;font-size:14px}
+.table th[name='col23'],td[name='col23']{width:140px;font-size:14px}
+.table th[name='col24'],td[name='col24']{width:90px;font-size:14px}
+}
+
+
+
+
+
