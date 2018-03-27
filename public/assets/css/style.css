@@ -155,11 +155,12 @@ figcaption {
 @media screen{
 header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 }
-.wrns1{position:absolute;top:30px;clear:both}
+.wrns1{display:block;position:absolute;top:30px;clear:both}
 .table th[name='col16'],td[name='col16'],th[name='col17'],td[name='col17']{width:30px}
 .table th[name='col18'],td[name='col18'],th[name='col19'],td[name='col19']{width:100px}
 .table th[name='col20'],td[name='col20']{width:150px}
 .wrns2{
+	display:block;
 	position:relative;
 	top:80px;
 	clear:both
@@ -208,7 +209,7 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 .btn:hover:enabled{background-color:#008CBA; alpha:1} /* Blue */
 .actphoto{position:relative;top:70px;width:750px}
 .actphotoleft{float:left;display:inline-block;width:50%}
-.actphotoleft{float:right;display:inline-block;width:50%}
+.actphotoright{float:right;display:inline-block;width:50%}
 .table input[name='action_btn']{
 	width:50px;
 	height:30px;
@@ -336,45 +337,52 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 .table th[name='col3'],td[name='col3']{width:80px}
 .table th[name='col10'],td[name='col10']{display:none}
 }
-
-
 /* ------------------------------- actions page print --------------------------------*/
-
-
-
 @media print{
 	@page{
 	size: A4;
-	margin: 5mm 0mm 5mm 0mm
+	margin: 0mm 0mm 5mm 0mm
 	}	
-thead {display: table-header-group} 
-tfoot {display: table-footer-group}
 /*HEADER*/
 header.onlyprint {
 	display:block;
-	position: absolute; /* Display only on print page (each) */
-	top: 0; /* Because it's header */
-	margin:0px;
+	position: fixed; /* Display only on print page (each) */
+	top: 0px; /* Because it's header */
+	left:0px;
+	margin:0px auto;
 	padding:0px;
 	width:100%;
-	border:double;
-	border-color:blue;
-	overflow:none
     }
-/*Footer*/	
+header.onlyprint img{
+width:100%;
+}	
+/*Footer*/
+/*	
 footer.onlyprint {
 	display:block;
-	position: absolute;
-    bottom: 0px; /* Because it's footer */
-	margin:0px;
+	position: fixed;
+    bottom: 0px; /* Because it's footer *//*
+	left:0px;
+	margin:0px auto;
 	padding:0px;
-	width:100%;
-	border:double;
-	border-color:green;
-	overflow:none
+	width:100%
     }
+footer.onlyprint img{
+	display: block;
+width:100%;
+}	
+*/	
+	
+.bodycontent{
+position:absolute;
+display: block;
+width:100%;
+margin: 80px auto
+}
 .noprint{display: none}
-.wrns1{top: 200px;border:dotted;overflow:none}
+.wrns1{display:block;position:relative;top:10px;overflow:none}
+.actphoto{display:block;position:relative;top:10px;width:100%;overflow:none}
+.wrns2{display: block;position:relative;top:10px;clear:both;overflow:none}
 /*table 1*/
 .table th[name='col16'],td[name='col16'],th[name='col17'],td[name='col17']{font-size:14px}
 .table th[name='col18'],td[name='col18']{width:250px;font-size:14px}
@@ -386,8 +394,3 @@ footer.onlyprint {
 .table th[name='col23'],td[name='col23']{width:140px;font-size:14px}
 .table th[name='col24'],td[name='col24']{width:90px;font-size:14px}
 }
-
-
-
-
-

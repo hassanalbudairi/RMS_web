@@ -3,10 +3,9 @@
 $("#mainheader").hide();
 </script>
 
-<header class="onlyprint">
-<img src="assets/images/qts_header.bmp">
-</header>
+
 <!------------------------- div for warning title-------------------------------->
+<div class="bodycontent">
 <div class="wrns1">
 	<table name="warnings actions" class="table">
  <tr>
@@ -32,37 +31,31 @@ $("#mainheader").hide();
 <select ng-model="photourl0" ng-options ="photo0.url as photo0.createdAt|date:'medium' for photo0 in acts.photos">
 <option value="">Select photo by date</option>
 </select>
-</br>
 <img ng-show="photourl0" src="../../../{{photourl0}}" style="width:250px;height:250px;padding:5px"/>
 </div>
-<div class="actphotoright">
+<div class="actphotoleft">
 <select ng-model="photourl1" ng-options ="photo1.url as photo1.createdAt|date:'medium' for photo1 in acts.photos">
 <option value="">Select photo by date</option>
 </select>
-</br>
 <img ng-show="photourl1" src="../../../{{photourl1}}" style="width:250px;height:250px;padding:5px"/>
 </div>
-</br></br>
 </div>
-
-
+</br></br></br></br>
 <div class="actphoto" ng-show="acts.photos.length">
 <div class="actphotoleft">
 <select ng-model="photourl2" ng-options ="photo2.url as photo2.createdAt|date:'medium' for photo2 in acts.photos">
 <option value="">Select photo by date</option>
 </select>
-</br>
 <img ng-show="photourl2" src="../../../{{photourl2}}" style="width:250px;height:250px;padding:5px"/>
 </div>
-<div class="actphotoright">
+<div class="actphotoleft">
 <select ng-model="photourl3" ng-options ="photo3.url as photo3.createdAt|date:'medium' for photo3 in acts.photos">
 <option value="">Select photo by date</option>
 </select>
-</br>
 <img ng-show="photourl3" src="../../../{{photourl3}}" style="width:250px;height:250px;padding:5px"/>
 </div>
-</br></br>
 </div>
+</br></br>
 <!------------------------- div for action buttons-------------------------------->
 <div class="noprint">
 <button onclick="window.print()">Print</button> 
@@ -102,8 +95,12 @@ $("#mainheader").hide();
 </tr>
 </table>
 </div>
+</div>
 
-<footer class="onlyprint">
-<img src="assets/images/qts_footer.bmp">
-</footer>
+<header class="onlyprint">
+<img src="assets/images/qts_header.png">
+</header>
+<!--footer class="onlyprint">
+<img src="assets/images/qts_footer.png">
+</footer-->
 <div id="divpopup" style="display:none"><p>login is required</p></div>
