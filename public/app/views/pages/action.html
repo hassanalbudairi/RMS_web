@@ -1,7 +1,109 @@
-Unstaged changes after reset:
-M	app/api.js
-M	public/app/controller/userCtrl.js
-M	public/app/routes.js
-M	public/app/views/index.html
-M	public/app/views/pages/action.html
-D	public/app/views/pages/actions.html
+<title>List of response actions for a rockfall warning message</title>
+<script>
+$("#mainheader").hide();
+</script>
+
+<header class="onlyprint">
+<img src="assets/images/qts_header.bmp">
+</header>
+<!------------------------- div for warning title-------------------------------->
+<div class="wrns1">
+	<table name="warnings actions" class="table">
+ <tr>
+	<th name='col16'>No.</th>
+	<th name='col17'>Sensor ID</th>
+	<th name='col18'>Location</th>
+	<th name='col19'>Date and time</th>
+	<th name='col20'>Message</th>
+</tr>
+<tr>
+	<td name='col16'>{{acts.lt4._id}}</td>
+	<td name='col17'>{{acts.lt4.snr_id}}</td>
+	<td name='col18'>{{acts.lt4.loc}}</td>
+	<td name='col19'>{{acts.lt4.createdAt | date:"medium"}}</td>
+	<td name='col20'>{{acts.lt4.msg}}</td>
+</tr>
+</table>
+</div>
+</br></br></br></br>
+<!------------------------- div for photos-------------------------------->
+<div class="actphoto" ng-show="acts.photos.length">
+<div class="actphotoleft">
+<select ng-model="photourl0" ng-options ="photo0.url as photo0.createdAt|date:'medium' for photo0 in acts.photos">
+<option value="">Select photo by date</option>
+</select>
+</br>
+<img ng-show="photourl0" src="../../../{{photourl0}}" style="width:250px;height:250px;padding:5px"/>
+</div>
+<div class="actphotoright">
+<select ng-model="photourl1" ng-options ="photo1.url as photo1.createdAt|date:'medium' for photo1 in acts.photos">
+<option value="">Select photo by date</option>
+</select>
+</br>
+<img ng-show="photourl1" src="../../../{{photourl1}}" style="width:250px;height:250px;padding:5px"/>
+</div>
+</br></br>
+</div>
+
+
+<div class="actphoto" ng-show="acts.photos.length">
+<div class="actphotoleft">
+<select ng-model="photourl2" ng-options ="photo2.url as photo2.createdAt|date:'medium' for photo2 in acts.photos">
+<option value="">Select photo by date</option>
+</select>
+</br>
+<img ng-show="photourl2" src="../../../{{photourl2}}" style="width:250px;height:250px;padding:5px"/>
+</div>
+<div class="actphotoright">
+<select ng-model="photourl3" ng-options ="photo3.url as photo3.createdAt|date:'medium' for photo3 in acts.photos">
+<option value="">Select photo by date</option>
+</select>
+</br>
+<img ng-show="photourl3" src="../../../{{photourl3}}" style="width:250px;height:250px;padding:5px"/>
+</div>
+</br></br>
+</div>
+<!------------------------- div for action buttons-------------------------------->
+<div class="noprint">
+<button onclick="window.print()">Print</button> 
+<button ng-hide="login.role == 'Client'" ng-click="acts.editAction()">Add action</button>
+<button ng-hide="login.role == 'Client'" ng-click="acts.ftcam()">Take photo (Front cam)</button>
+<button ng-hide="login.role == 'Client'" ng-click="acts.ftcam()">Take photo (Side cam)</button>
+<button ng-hide="login.role == 'Client'" ng-click="acts.edit = false">Cancel</button>
+</div>
+<!------------------------- div for action edit window-------------------------------->
+<div class="wrns2" ng-show="acts.edit">
+<p>{{login.fname}} {{login.lname}}: {{login.role}}</p>
+<textarea style="width:300px;height:150px" ng-model="acts.data.msg"></textarea>
+</br></br>
+<input placeholder="Change status" list="stat" required ng-model="acts.data.act"/>
+  <datalist id="stat">
+	<option>Active</option>
+	<option>Inspection</option>
+	<option>Fixed</option>
+  </datalist>
+<input class='btn' type='submit' value='submit' ng-click="acts.add(data)"/>
+</div>
+
+<!------------------------- div for action list-------------------------------->
+<div class="wrns2">
+<table ng-show="acts.lst" name="Actions list" class="table">
+<tr>
+	<th name='col21'>Date</th>
+	<th name='col22'>Actions</th>
+	<th name='col23'>Taken by</th>
+	<th name='col24'>Warning status</th>
+</tr>
+	<tr ng-repeat="act in acts.lst">
+	<td name='col21'>{{act.createdAt | date:"medium"}}</td>
+	<td name='col22'>{{act.act}}</td>
+	<td name='col23'>{{act.fname}} {{act.lname}} role:{{act.role}}</td>
+	<td name='col24'>{{act.stat}}</td>
+</tr>
+</table>
+</div>
+
+<footer class="onlyprint">
+<img src="assets/images/qts_footer.bmp">
+</footer>
+<div id="divpopup" style="display:none"><p>login is required</p></div>
