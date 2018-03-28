@@ -11,6 +11,7 @@ const Models  = require('./app/models');
 
 var twilio = require('twilio');
 const client = twilio(process.env.accountSid,process.env.authToken);
+const MessagingResponse = twilio.twiml.MessagingResponse;
  
 //middleware
 app.use(morgan('dev'));
@@ -21,8 +22,8 @@ app.use('/api',appRoutes);
 //Connection to mongodb
 const mongoose = require ('mongoose');
 mongoose.connect('mongodb://localhost:27017/RMSdb',{ useMongoClient: true }, (err)=>{
-if(err)console.log('Not connected to the database: ' + err);
-else console.log('Successfully connected to MongoDB');});
+	if(err)console.log('Not connected to the database: ' + err);
+	else console.log('Successfully connected to MongoDB');});
 mongoose.Promise = global.Promise;
 
 app.get('*', function(req,res,next){
@@ -38,61 +39,45 @@ app.post('/message',function(req,res){
 	var msgFrom = req.body.From;
 	var msgBody = req.body.Body;
 	var tst = msgBody.indexOf('Alarm');
-	console.log(req.body);
+	const twiml = new MessagingResponse();
+	var knownSimNu = false;
+
 //Check if the message is from a registered user
 Models.users.findOne({'simNu': msgFrom},function(err,doc){
-	if(doc){
-	if (msgBody === 'RMS out'){
+	knownSimNu = true;
+	if(msgBody === 'RMS out'){
 	Models.users.findByIdAndRemove(doc._id).exec();
-	res.send(`
-	<Response>
-	<Message>
-	Hi ${doc.fname} ${doc.lname}, your contact number has been removed from RMS list.
-	</Message>
-	</Response>
-	`);
+	client.messages.create({
+		to: msgFrom,
+		from: process.env.Twilio_no,
+		body: 'Hi '.concat(doc.fname)+'\xa0'.concat(doc.lname)+' your number is removed from RMS contact list'
+		});
 	}else{
-	var item ={
-	simNu: msgFrom, 
-	msgbody: msgBody};
-	var data= new Models.ErrComm(item);
-	data.save();
-	res.send(`
-	<Response>
-	<Message>
-	Hi ${doc.fname} ${doc.lname}. To opt out, please text 'RMS out'.
-	</Message>
-	</Response>
-	`);
+	//send a message to the user to instruct on how to opt out
+	client.messages.create({
+		to: msgFrom,
+		from: process.env.Twilio_no,
+		body: 'Hi '.concat(doc.fname)+'\xa0'.concat(doc.lname)+' to opt-out, text: RMS out'
+		});
 	}
-	}
-	});
-// check if the message from a registered sensor
-	Models.sensordb.findOne({'simNu': msgFrom},function(err,doc){
-	//if the number not in the list then log the details into the Error Communication db
-	if(err||doc == null){
-	var item ={
-	simNu: msgFrom, 
-	msgbody: msgBody};
-	var data= new Models.ErrComm(item);
-	data.save();
-		return
-	}
-	else if (tst !== -1){
+}).exec().then(function(){		
+//check if this is a register sensor simNu
+Models.sensordb.findOne({'simNu': msgFrom},function(err,results){
+	knownSimNu = true;
+	if (tst !== -1){
 // record the message into warningsdata
-	console.log('Warning message');
 	var item1 ={
-	snr_id:doc._id,
+	snr_id:results._id,
 	simNu:msgFrom,
-	loc:doc.loc,
+	loc:results.loc,
 	msg:msgBody
 	}
 	var data1= new Models.warningsdb(item1);
 	data1.save(function (err){
-			if(err) console.log(err);
-			});
+		if(err) console.log(err);
+	});		
 // Send sms to all registered contacts
-    Models.users.find({
+   Models.users.find({
 		$or:[
 		{'role': "Member"},
 		{'role': "Admin"},
@@ -104,23 +89,27 @@ Models.users.findOne({'simNu': msgFrom},function(err,doc){
         client.messages.create({
 		to: contact.simNu,
 		from: process.env.Twilio_no,
-		body: 'Hi '.concat(contact.fname)+'\xa0'.concat(contact.lname)+' Warning message from sensor # '.concat(doc._id)+' For more details, visit http://www.qtsrms.com/rmsMonitoring/warnings'
-		}, function(err, message) {
-		if (err){
-		console.log(err);
-		}else{
-		console.log(message.sid)
-		}
+		body: 'Hi '.concat(contact.fname)+'\xa0'.concat(contact.lname)+' Warning message from sensor # '.concat(results._id)+' For more details, visit http://www.qtsrms.com/rmsMonitoring/warnings'
 		});
 		});
 		}
-	});
-	}else{ //health check info
-	console.log('Health check message');	
+		});
+	}else{ 
+	//health check info
 	var sim = msgFrom.slice(8);
 	var filename = 'S'.concat(sim);
-	console.log(filename);
 	Models.addDataIndSnr(filename,msgBody);
 	}
+}).exec().then(function(){	
+	if(knownSimNu == false){
+	var item ={
+	simNu: msgFrom, 
+	msgbody: msgBody};
+	var data= new Models.ErrComm(item);
+	data.save();
+	}
 	});
-});
+	});
+	res.writeHeader(200,{'Content-Type': 'text/xml'});
+	res.end(twiml.toString());
+	});
