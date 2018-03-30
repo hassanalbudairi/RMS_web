@@ -92,8 +92,8 @@ if (charge !== null){
 	
 	//console.log('=====================================');
 //console.log(filename);
-console.log(charge[0]);
-console.log(sgn[0]);
+//console.log(charge[0]);
+//console.log(sgn[0]);
 let db = mongoose.connection;
 //db.on('error', function(err){ console.log('connection error: '+err)});
 //db.on('connected', function() { console.log(' Connection success-------------')});
