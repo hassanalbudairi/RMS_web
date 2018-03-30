@@ -45,6 +45,7 @@ app.post('/message',function(req,res){
 //Check if the message is from a registered user
 Models.users.findOne({'simNu': msgFrom},function(err,doc){
 	knownSimNu = true;
+	if (doc){
 	if(msgBody === 'RMS out'){
 	Models.users.findByIdAndRemove(doc._id).exec();
 	client.messages.create({
@@ -60,10 +61,12 @@ Models.users.findOne({'simNu': msgFrom},function(err,doc){
 		body: 'Hi '.concat(doc.fname)+'\xa0'.concat(doc.lname)+' to opt-out, text: RMS out'
 		});
 	}
+	}
 }).exec().then(function(){		
 //check if this is a register sensor simNu
 Models.sensordb.findOne({'simNu': msgFrom},function(err,results){
 	knownSimNu = true;
+	if(results){
 	if (tst !== -1){
 // record the message into warningsdata
 	var item1 ={
@@ -99,6 +102,7 @@ Models.sensordb.findOne({'simNu': msgFrom},function(err,results){
 	var sim = msgFrom.slice(8);
 	var filename = 'S'.concat(sim);
 	Models.addDataIndSnr(filename,msgBody);
+	}
 	}
 }).exec().then(function(){	
 	if(knownSimNu == false){
