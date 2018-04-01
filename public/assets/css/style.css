@@ -12,12 +12,11 @@ html{font-family:sans-serif; -ms-text-size-adjust:100%; -webkit-text-size-adjust
 	float:right;
 	margin-top:10px
 }
-.chart1{
+.chart1, .chart2{
 	position: relative;
 	top: 60px;
 	width:80%;
-	height:500px;
-	border:solid
+	height:500px
 }
 .table{
 	table-layout:fixed;
@@ -322,7 +321,7 @@ header.onlyprint, footer.onlyprint{display:none} /* Hide from screen */
 .actphotoleft{width:90%}
 .side{width:97%; float:none}
 .map{width: 97%; float:none}
-.chart1{width:97%;float:none;padding-bottom:40px}
+.chart1, .chart2{width:97%;float:none;padding-bottom:40px}
 .table th[name='col1'],td[name='col1'],th[name='col2'],td[name='col2']{display:none}
 .table th[name='col12'],td[name='col12']{display:none}
 .table th[name='col4'],td[name='col4']{width:70px}
