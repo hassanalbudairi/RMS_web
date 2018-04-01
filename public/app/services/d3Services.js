@@ -90,7 +90,7 @@ var svg = d3.select(".chart1")
 		.style("font-size", "16px")
 		.call(yAxis)
 		.append("text")
-		.attr("dx",(x.bandwidth()/2))
+		.attr("dx",(width/2))
 		.attr("dy", "-1em")
 		.style("text-anchor","middle")
 		.style("font-size", "20px")
@@ -105,9 +105,8 @@ var svg = d3.select(".chart1")
 		
 	
 // signal strength graph
-y2 = d3.scaleLinear().rangeRound([height, 0]);
-y2.domain([0, d3.max(data, function(d) { return d.sgn; })]).nice();
-yAxis = d3.axisLeft(y2);
+y.domain([0, d3.max(data, function(d) { return d.sgn; })]).nice();
+yAxis = d3.axisLeft(y);
 var svg2 = d3.select(".chart2")
         .append("svg")
         .attr("width",char1_width)
@@ -121,9 +120,9 @@ var svg2 = d3.select(".chart2")
 		.attr("height", 0)
 		.attr("y", height)
 		.attr("width", x.bandwidth())
-		.attr("height", function(d){ return height - y2(d.sgn);})
+		.attr("height", function(d){ return height - y(d.sgn);})
 		.attr("x",function(d){return x(d.date);})
-		.attr("y",function(d){return y2(d.sgn);})
+		.attr("y",function(d){return y(d.sgn);})
 		.attr("fill", "yellow");
 // label the bars
 	svg2.selectAll("text")
@@ -134,8 +133,8 @@ var svg2 = d3.select(".chart2")
 		.attr("x", function(d){return x(d.date) + x.bandwidth()/2;})
 		.attr("y", function(d){
 		a = 20;
-		if ((height - y2(d.sgn)) < 20) a = -20;
-		return y2(d.sgn)+ a;})
+		if ((height - y(d.sgn)) < 20) a = -20;
+		return y(d.sgn)+ a;})
 		.style("fill", "red")
 		.style("font-weight", "bold")
 		.style("text-anchor", "middle");
@@ -155,7 +154,7 @@ var svg2 = d3.select(".chart2")
 		.style("font-size", "16px")
 		.call(yAxis)
 		.append("text")
-		.attr("dx",(x.bandwidth()/2))
+		.attr("dx",(width/2))
 		.attr("dy", "-1em")
 		.style("text-anchor","middle")
 		.style("font-size", "20px")
