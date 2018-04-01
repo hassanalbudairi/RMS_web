@@ -103,12 +103,11 @@ var svg = d3.select(".chart1")
         .text("Relative charging (%)")
         .attr("transform", "translate(-50, 200), rotate(-90)");
 		
-		
-		
-		
+	
 // signal strength graph
-y.domain([0, d3.max(data, function(d) { return d.sgn; })]).nice();
-yAxis = d3.axisLeft(y);
+y2 = d3.scaleLinear().rangeRound([height, 0]);
+y2.domain([0, d3.max(data, function(d) { return d.sgn; })]).nice();
+yAxis = d3.axisLeft(y2);
 var svg2 = d3.select(".chart2")
         .append("svg")
         .attr("width",char1_width)
@@ -122,9 +121,9 @@ var svg2 = d3.select(".chart2")
 		.attr("height", 0)
 		.attr("y", height)
 		.attr("width", x.bandwidth())
-		.attr("height", function(d){ return height - y(d.sgn);})
+		.attr("height", function(d){ return height - y2(d.sgn);})
 		.attr("x",function(d){return x(d.date);})
-		.attr("y",function(d){return y(d.agn);})
+		.attr("y",function(d){return y2(d.sgn);})
 		.attr("fill", "yellow");
 // label the bars
 	svg2.selectAll("text")
@@ -135,8 +134,8 @@ var svg2 = d3.select(".chart2")
 		.attr("x", function(d){return x(d.date) + x.bandwidth()/2;})
 		.attr("y", function(d){
 		a = 20;
-		if ((height - y(d.sgn)) < 20) a = -20;
-		return y(d.sgn)+ a;})
+		if ((height - y2(d.sgn)) < 20) a = -20;
+		return y2(d.sgn)+ a;})
 		.style("fill", "red")
 		.style("font-weight", "bold")
 		.style("text-anchor", "middle");
@@ -168,21 +167,6 @@ var svg2 = d3.select(".chart2")
 		.style("fill", "red")
         .text("GSM signal strength")
         .attr("transform", "translate(-50, 200), rotate(-90)");
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		});
 		};
 return {
