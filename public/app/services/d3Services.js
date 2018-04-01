@@ -75,7 +75,7 @@ var svg = d3.select(".chart1")
 		.style("text-anchor", "middle");
 		//draw axes
 	svg.append("g")
-		.attr("class", "axis")
+		.attr("class", "axis axis--x")
 		.attr("transform", "translate(0,"+height+")")
 		.call(d3.axisBottom(x))
 		.selectAll("text")
@@ -84,10 +84,11 @@ var svg = d3.select(".chart1")
 		.style("text-anchor","end")
 		.style("font-size", "20px")
 		.attr("transform", "rotate(-45)");
-	svg.append("g")// graph title
-		.attr("class", "axis")
+	svg.append("g")
+		.attr("class", "axis axis--y")
 		.style("font-size", "16px")
-		.call(yAxis)
+		.call(yAxis);
+	svg.append("g")// graph title
 		.append("text")
 		.attr("dx",(width/2))
 		.attr("dy", "-1em")
@@ -105,7 +106,7 @@ var svg = d3.select(".chart1")
 	
 // signal strength graph
 y.domain([0, d3.max(data, function(d) { return d.sgn; })]).nice();
-yAxis = d3.axisLeft(y);
+yAxis = d3.axisLeft(y).ticks(4,"");
 var svg2 = d3.select(".chart2")
         .append("svg")
         .attr("width",char1_width)
@@ -139,7 +140,7 @@ var svg2 = d3.select(".chart2")
 		.style("text-anchor", "middle");
 		//draw axes
 	svg2.append("g")
-		.attr("class", "axis")
+		.attr("class", "axis axis--x")
 		.attr("transform", "translate(0,"+height+")")
 		.call(d3.axisBottom(x))
 		.selectAll("text")
@@ -148,10 +149,11 @@ var svg2 = d3.select(".chart2")
 		.style("text-anchor","end")
 		.style("font-size", "20px")
 		.attr("transform", "rotate(-45)");
-	svg2.append("g")// graph title
-		.attr("class", "axis")
+	svg2.append("g")
+		.attr("class", "axis axis--y")
 		.style("font-size", "16px")
-		.call(yAxis)
+		.call(yAxis);
+	svg2.append("g")// graph title
 		.append("text")
 		.attr("dx",(width/2))
 		.attr("dy", "-1em")
