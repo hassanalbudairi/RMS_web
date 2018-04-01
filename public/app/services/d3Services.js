@@ -30,7 +30,6 @@ $http.post('/api/indSnrdb',snr).then(function(res, data){
 	}
 }).then(function(data1){
 	data = data1.slice(-10);// chart1 - select only the last 10 elements in the array;
-	console.log(data);
 //Specify scales for the x and y axes	
 var margin = {top: 40, right: 10, bottom: 100, left: 70},
 	width = char1_width - margin.left - margin.right,
