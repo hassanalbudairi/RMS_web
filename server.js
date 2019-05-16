@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const path       = require('path');
 const port    = process.env.port || 8080;
 const Models  = require('./app/models');
+//upload images
+const download = require('image-downloader');
 
 var twilio = require('twilio');
 const client = twilio(process.env.accountSid,process.env.authToken);
@@ -117,3 +119,26 @@ Models.sensordb.findOne({'simNu': msgFrom},function(err,results){
 	res.writeHeader(200,{'Content-Type': 'text/xml'});
 	res.end(twiml.toString());
 	});
+//--------------------MMS SERVICE----------------------//	
+app.post('/mms',function(req,res){
+	var a = req.body.filelist.split(',');
+	var b = 'http://www.intellisoftware.co.uk/smsgateway/retrievemms.aspx?username='.concat(process.env.intelli_un)+'&password='.concat(process.env.intelli_pw)+'&msgid='.concat(req.body.msgid)+'&msgpart='.concat(a[1]);
+	var url = encodeURI(b);
+	var c = req.body.from.slice(-5);
+	var d = a[1].split('.');//image extension
+	var e = req.body.sent.split('+');
+	var ee = e[0].toString().replace('-','').replace('-','').replace(':','').replace(':','');
+	var dest='./public/assets/images/img/'.concat(ee)+'_'.concat(c)+'.'.concat(d[1]);
+	const options ={
+	url:url,
+	dest:dest
+	};
+download.image(options)
+	//.then(({filename, image})=>{
+	//console.log('image saved to', filename)
+	//})
+	.catch((err)=>{
+	console.log(err);
+	});
+	res.sendStatus(200);
+});

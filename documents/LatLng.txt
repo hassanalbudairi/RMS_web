@@ -1,0 +1,274 @@
+RMS 1 +447467300181
+RMS 2 +447721045836
+RMS 3 +447748714522
+RMS 4 +447748714529
+RMS 1 cam 1 +447935617565
+RMS 1 cam 2 +447542842817
+
+57.351879
+-5.5455636
+Strome Ferry IV53 8UH
+
+55.8642
+-4.2518
+Glasgow
+
+55.6222
+-4.1769
+QTS
+
+
+56.8198
+-5.1052
+Fort Wailliam
+
+55.8473
+-4.4401
+Paisley
+
+
+
+
+//date in DDMMYYYY format so that D3 plot can recongise the data
+	var d = new Date().toISOString().replace(/T.+/,'');
+	var divide = d.split('-');
+    var date = divide[2]+divide[1]+divide[0];
+
+
+
+//upload imgs from DB
+router.get('/loadimgs', function(req, res, next) {	
+	console.log('loading images');
+	
+	//streaming from gridfs
+	gfs.files.find().toArray(function (err,files){
+		if (err || !files){
+			console.log('ERRRRRRRRRRR');
+			return
+		}
+		res.writeHead(200,{'Content-type':files[0].contentType});
+		var readstream=gfs.createReadStream({
+		filename:files[0].filename
+	});
+	
+		readstream.on('data', function(chunk) {
+        res.write(chunk);
+    });
+	
+		readstream.on('end', function() {
+        res.end();        
+    });
+		readstream.on('error', function (err) {
+		console.log('An error occurred!');
+		req.session.errors=err;
+    });	
+
+	});
+});
+
+
+
+/*
+	
+////////////////////	
+	var part = [];
+	part: req.files.pic;
+	console.log('11111111111111111111111111111');
+	console.log(part);
+	console.log(part.value);
+	console.log(part.name);
+	console.log(part.mimetype);
+	//stream to gridfs
+	
+	var writestream=gfs.createWriteStream({
+		filename: 'qts_logo.png',
+	});
+	// create a read-stream from where the file is currently located
+	//and pipe it into the db (through write-stream)
+	fs.createReadStream('../RMS_website/qts_logo.png').pipe(writestream);
+	writestream.on('close', function(file){
+		 if(!file) {
+            console.log('No file received');
+		}
+		//do something with 'file'
+		console.log(file.filename + 'Saved to DB');
+	});
+	res.redirect('/warnings');
+	*/
+
+
+<div>
+    <label for="pic">Choose file to upload</label>
+    <input type="file" name="pic" value="pic" multiple>
+  </div>
+  <div>
+    <button>Submit</button>
+  </div>
+</form>
+
+
+/*
+	noteconts.find()
+	.then(function(docs){
+	doc.forEach(function(item){
+		console.log(item.fname);
+		console.log(item.simNu);
+		client.messages
+  .create({
+    to: '{item.simNu}',
+    from: '+442895072359',
+    body: Hello {item.fname} {item.lname}. You said: {item.simNu},
+  });
+	*/	
+		
+		
+		
+		
+		////////////////////////////////
+		
+		
+
+	/*
+	res.send(`
+	<Response>
+	<Sms from="+442895072359" to="${item.simNu}">
+	Hello ${item.fname} ${item.lname}. You said: ${item.simNu}
+	</Sms>
+	</Response>
+	`);
+	*/
+	
+
+<Sms from="+442895072359" to="{{item.simNu}}"></Sms>
+	
+    {{ Hi {{item.fname}}This is a sensor alarm}}
+
+
+<Media>https://demo.twilio.com/owl.png</Media>
+
+/*
+//route to /monitor individual sensors
+router.get('/sensordata', function(req, res, next) {
+	var filename= req.body.filename;
+	//var SensorData = mongoose.model(req.body.filename,TwilioDataSchema,req.body.filename);
+	console.log(filename);
+	console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+	sensordb.find()
+	.then(function(err,doc){
+		if(err){
+		req.session.errors =err;
+		res.redirect('/monitorsensors');
+	}	
+	SensorData.find()
+	.then(function(err, obj){
+	if(err){
+		req.session.errors =err;
+		res.redirect('/monitorsensors');
+	}			
+res.render('monitorsensors',{title:'Monitor individual sensor',layout: 'rmsMonitorLayout.hbs',success:req.session.success, errors:req.session.errors, items:doc, objs:obj});
+	});
+	});
+});
+*/
+
+var s1 = document.getElementById("S").value;
+for(i=0;i<id_sim.length;i++){
+var j=id_sim[i].sim.toString();
+id_sim[i].sim = j.slice(7);
+}
+
+var s2 = $.grep(id_sim, function(obj){ return obj.id == s1;});
+if(s2.length===0){
+alert("Data is not loaded");
+return;
+}else{
+console.log('about to redirect');
+var filename= document.createElement("input");
+	filename.type = "hidden";
+	filename.name = "filename";
+	filename.id ="filename";
+	filename.value='S'.concat(s2[0].sim);
+
+
+
+
+<td name="fnameconts">{{this.fname}}</td>
+			<td name="lnameconts">{{this.surname}}</td>
+			<td name="simNuconts">{{this.simNu}}</td>
+			<td name="dateconts">{{this.date}}</td>
+			<td name="noteconts">{{this.note}}</td>
+
+
+
+
+//sensordb.find().then(function(doc){
+	//	console.log(doc);
+	//});
+	
+	sensordb.findOne({simNu:req.body.simNu}, function(err, obj){
+	//console.log('Inside');
+	if(err){
+	console.error('error, can not create data collection for this sensor');
+	return;
+	}
+	//console.log(req.body.simNu);
+	//console.log('££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££');
+	//console.log(obj);
+/*
+	.then(function(doc){
+		console.log('about');
+		console.log(sensordb.length);
+	for (var i =0; i < sensordb.length;i++){
+		console.log('Inside');
+    console.log (sensordb[i]);
+	}	
+	});
+		
+	
+	sensordb.findOne({simNu:req.body.simNu}, function(err, doc){
+	console.log('Inside');
+	if(err){
+	console.error('error, can not create data collection for this sensor');
+	return;
+	}
+	console.log(req.body.simNu);
+	console.log(doc);
+		//console.log(doc._id);
+		//var filename = 'S'.concat(doc._id);
+	//console.log(filename);		
+	//	TwilioData.create({category: 1, title: filename}, function(err, doc) {
+    // At this point the jobs collection is created.
+	//});
+	});
+	*/
+/*
+	sensordb.find()
+	.then(function(doc){
+	
+	*/
+/*
+// route to create new data base for the added sensor
+router.get('/createdb', function(req, res, next) {
+	
+	console.log('Route to create db');
+	sensordb.findOne({simNu:req.body.simNu}, function(err, obj){
+	console.log('Inside');
+	if(err){
+	console.error('error, can not create data collection for this sensor');
+	return;
+	}
+	console.log(req.body.simNu);
+	console.log(obj);
+		//console.log(doc._id);
+		//var filename = 'S'.concat(doc._id);
+	//console.log(filename);		
+	//	TwilioData.create({category: 1, title: filename}, function(err, doc) {
+    // At this point the jobs collection is created.
+	//});
+	});
+	
+	
+	//res.redirect('/createdb');
+	
+});
+*/
